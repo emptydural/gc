@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * root config에서 Mybatis 관련 빈 설정시 Mybatis 셋팅 클래스
- * Mybatis Cㅐnfig 설정은 따로 빼서 가지고 있는다.
+ * Mybatis Config 설정은 따로 빼서 가지고 있는다.
  * 컴포넌트로 만들고 이를 Getter로 받아오자 (20190512 완료)
  */
 @Slf4j

@@ -19,11 +19,13 @@ public class HomeDaoImpl implements HomeDao{
 		this.sqlSession = sqlSession;
 	}
 
+	/*현재 시각 반환*/
 	@Override
 	public HomeVO selectHomeCurrentTimeInfo() {
 		return sqlSession.selectOne("homeMapper.selectHomeCurrentTimeInfo");
 	}
 	
+	/*현재시각 반환 - 고의로 에러낸 SQL*/
 	@Override
 	public HomeVO selectHomeCurrentTimeInfo2() {
 		return sqlSession.selectOne("homeMapper.selectHomeCurrentTimeInfo2");

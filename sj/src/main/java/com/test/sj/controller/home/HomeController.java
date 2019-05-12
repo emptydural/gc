@@ -41,7 +41,7 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", homeVO);
 		
-		return "home/home";
+		return "home/home.tiles";
 	}
 	
 	/**
@@ -59,7 +59,7 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", homeVO);
 		
-		return "home/homecopy";
+		return "home/homecopy.tiles";
 	}
 	
 }

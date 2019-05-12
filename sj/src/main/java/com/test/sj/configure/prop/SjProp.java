@@ -22,10 +22,11 @@ public class SjProp {
 	 * TODO : 패키지명은 본래는 enum으로 관리해서 값을 가져오려 했으나 enum으로는 되지 않고 static으로만 가능했다.
 	 * enum과 static의 컴파일 순서 차이는 추후 봐야 할 듯 하다, (20190504)
 	 */
-	public static final String	BASE_PACKAGE 			= "com.test.sj",
-								DEFAULT_RESOLVER_PREFIX	= "WEB-INF/views/",
-								DEFAULT_RESOLVER_SUFFIX = ".jsp",
-								MYBATIS_MAPPER_LOCATION = "/mapper/**/*.xml";
+	public static final String	BASE_PACKAGE 				= "com.test.sj",
+								DEFAULT_RESOLVER_PREFIX		= "WEB-INF/views/",
+								DEFAULT_RESOLVER_SUFFIX		= ".jsp",
+								MYBATIS_MAPPER_LOCATION		= "/mapper/**/*.xml",
+								TILES_CONFIGURE_LOCATION	= "/WEB-INF/tiles/default-layout.xml";
 	/**
 	 * 해당 클래스 및 내부의 enum에 대해 고정값이냐 서버에 따른 변동값이냐에 따른 제어가 필요 
 	 * LOCAL	: 0

@@ -1,5 +1,7 @@
 package com.test.sj.configure.setting;
 
+import java.util.ArrayList;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +16,9 @@ import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
+import org.springframework.web.servlet.view.tiles3.TilesView;
+import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
 import com.test.sj.configure.prop.SjProp;
 
@@ -43,33 +48,69 @@ import lombok.extern.slf4j.Slf4j;
 public class ServletConfiguration extends WebMvcConfigurerAdapter{
 	
 	/**
+	 * 정적 리소스 경로 설정해야 한다.(20190501 완료)
+	 */
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		log.debug("==================== [START : STATIC RESOURCE SETTING] ====================");
+		
+		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+		
+		log.debug("==================== [END : STATIC RESOURCE SETTING] ====================");
+	}
+	
+	/**
 	 * viewResolver가 필요하다. (20190501 완료)
-	 * jsp, jstlview 이용
+	 * 우선 순위는 타일즈보다 뒤로
+	 * default - jsp, jstlview 이용
+	 * tilesviewer도 필요
 	 */
 	@Override
 	public void configureViewResolvers(ViewResolverRegistry registry) {
-		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+		TilesViewResolver				tilesViewResolver	= new TilesViewResolver();
+		InternalResourceViewResolver	viewResolver 		= new InternalResourceViewResolver();
 		
 		log.debug("==================== [START : DEFAULT VIEW RESOLVER SETTING] ====================");
 		
+		/*tilesView*/
+		tilesViewResolver.setViewClass(TilesView.class);
+		tilesViewResolver.setOrder(1);
+		log.debug("set tiles view");
+		
+		/*default jstlview*/
 		viewResolver.setViewClass(JstlView.class);
 		viewResolver.setPrefix(SjProp.DEFAULT_RESOLVER_PREFIX);
 		viewResolver.setSuffix(SjProp.DEFAULT_RESOLVER_SUFFIX);
-		viewResolver.setOrder(1);
+		viewResolver.setOrder(2);
 		
 		log.debug("default prefix : " + SjProp.DEFAULT_RESOLVER_PREFIX);
 		log.debug("default suffix : " + SjProp.DEFAULT_RESOLVER_SUFFIX);
 		
 		log.debug("==================== [END : DEFAULT VIEW RESOLVER SETTING] ====================");
 		
+		/*2개를 추가*/
+		registry.viewResolver(tilesViewResolver);
 		registry.viewResolver(viewResolver);
 	}
 	
 	/**
-	 * 정적 리소스 경로 설정해야 한다.(20190501 완료)
+	 * tiles config 추가필요 
+	 * TODO : WebMvcConfigurer에는 해당 부분에 대응하는 메서드가 없는 것으로 보인다. 그냥 Bean으로 추가하자.(20190504 완료)
+	 * tiles.xml부분은 JavaConfig로 하기가 까다롭다. 얌전히 xml로 진행하자
 	 */
-	@Override
-	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/resource/**").addResourceLocations("/resources/");
+	
+	@Bean(name = "tilesConfigurer")
+	public TilesConfigurer getTilesConfigure() {
+		TilesConfigurer		tilesConfigurer	= new TilesConfigurer();
+		ArrayList<String>	definsionList	= new ArrayList<>();
+		String[] 			definitions		= null;
+		
+		definsionList.add(SjProp.TILES_CONFIGURE_LOCATION);
+		
+		definitions = definsionList.toArray(new String[definsionList.size()]);
+		
+		tilesConfigurer.setDefinitions(definitions);
+		
+		return tilesConfigurer;
 	}
 }

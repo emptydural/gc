@@ -3,12 +3,7 @@ package com.test.sj.configure;
 import java.util.Arrays;
 
 import javax.servlet.Filter;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRegistration;
 
-import org.springframework.util.Assert;
-import org.springframework.util.ObjectUtils;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.DispatcherServlet;
@@ -124,17 +119,22 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
 	 * 404처리는 해당 영역이나 필터레서 처리해야 할 것 같다.
 	 * TODO : 404처리를 위해 NoHandlerFoundException을 Throw하도록 처리한다. 
 	 * 하여 어떻게든 dispatcher을 가져와서 처리를 해야 했기에 createDispatcherServlet을 오버라이딩해서 설정을 바꿨다. (20190504 완료)
-	 * TODO : 근데 FrameworkServlet은 또 뭥미?(20190504)
+	 * TODO : 근데 FrameworkServlet는 DispatcherServlet의 부모인거 같은데 이건 또 뭥미?(20190504)
 	 */
 	@Override
 	protected FrameworkServlet createDispatcherServlet(WebApplicationContext servletAppContext) {
+		log.debug("==================== [START : CREATE DISPATCHER SERVLET] ====================");
+		
 		DispatcherServlet	dispatcherServlet	= (DispatcherServlet) super.createDispatcherServlet(servletAppContext);
 		FrameworkServlet	frameworkServlet	= null;
+		
+		log.debug("SETTING : THROWS NO_HANDLER_EXCEPTION -> TRUE");
 		
 		dispatcherServlet.setThrowExceptionIfNoHandlerFound(true);
 		
 		frameworkServlet = dispatcherServlet;
 		
+		log.debug("==================== [END : CREATE DISPATCHER SERVLET] ====================");
 		return frameworkServlet;
 	}
 }
