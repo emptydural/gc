@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    <!-- 메인 Mapper -->
+<mapper namespace="homeMapper">
+	
+    <resultMap type="HomeVO" id="HOMEMAP">
+    	<result property="currTime" column="CURRTIME"/>
+    </resultMap>
+    
+    <select id="selectHomeCurrentTimeInfo" resultMap="HOMEMAP">
+        /*homeMapper.selectHomeCurrentTimeInfo - 현재 시각 반환*/
+        SELECT TO_CHAR(SYSTIMESTAMP,'YYYY-MM-DD HH24:MI:SS.FF3 TZR') AS CURRTIME
+        FROM DUAL
+    </select>
+    
+    <!-- TODO : 일부러 에러가 나도록 처리한다. (DUAL2) -->
+    <select id="selectHomeCurrentTimeInfo2" resultMap="HOMEMAP">
+        /*homeMapper.selectHomeCurrentTimeInfo2 - 현재 시각 반환*/
+        SELECT TO_CHAR(SYSTIMESTAMP,'YYYY-MM-DD HH24:MI:SS.FF3 TZR') AS CURRTIME
+        FROM DUAL2
+    </select>
+</mapper>
