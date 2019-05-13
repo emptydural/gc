@@ -6,7 +6,7 @@
 	<input type="hidden" id="arr" name="arr"/>
 </form>
 
-<div class="sidebar" data-color="orange" data-image="img/full-screen-image-3.jpg">
+<div class="sidebar" data-color="orange" data-image="/resources/img/full-screen-image-3.jpg">
      <div class="logo">
         <a href="/" class="logo-text">
             TEST
