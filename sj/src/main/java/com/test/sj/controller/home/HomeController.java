@@ -5,8 +5,6 @@ import java.util.Locale;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.test.sj.service.home.HomeService;
 import com.test.sj.vo.home.HomeVO;
@@ -22,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class HomeController {
 	
-	private HomeService homeService;
+	private final HomeService homeService;
 	
 	public HomeController(HomeService homeService) {
 		this.homeService = homeService;

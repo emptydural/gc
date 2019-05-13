@@ -10,6 +10,7 @@ import org.apache.ibatis.type.TypeAliasRegistry;
 import org.springframework.stereotype.Component;
 
 import com.test.sj.vo.home.HomeVO;
+import com.test.sj.vo.login.LoginVO;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +29,9 @@ public class MyBatisConfigureSetting {
 	
 	@PostConstruct
 	private void getMybatisConfigration() {
+		
 		log.debug("MyBatisConfig setting postConstruct check");
+		
 		myBatisConfig = new Configuration();
 		
 		TypeAliasRegistry	alias		= myBatisConfig.getTypeAliasRegistry();
@@ -50,9 +53,15 @@ public class MyBatisConfigureSetting {
 	 */
 	private ArrayList<Class<?>> loadAliasClasses() {
 		ArrayList<Class<?>> classList = new ArrayList<>();
+		/*
+		 * default String, List setting
+		 * TODO : List는 default로 이미 등록되어있다.(20190512)
+		 */
+		classList.add(String.class);
 		
-		/*Alias로 등록할 클래스에 대해 여기에 설정*/
+		/* Alias로 등록할 클래스에 대해 여기에 설정*/
 		classList.add(HomeVO.class);
+		classList.add(LoginVO.class);
 		
 		return classList;
 	}

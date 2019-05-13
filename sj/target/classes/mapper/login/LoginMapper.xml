@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<!-- 메인 Mapper -->
+<mapper namespace="loginMapper">
+	
+	<resultMap type="LoginVO" id="LOGINMAP" >
+		<result column="V_AUCTION_USERCD"			property="userCode"/>
+		<result column="V_AUCTION_USERID"			property="username"/>
+		<result column="V_AUCTION_PWD"				property="password"/>
+		<result column="V_AUCTION_USERNM"			property="userNm"/>
+	</resultMap>
+	
+	<select id="loadUserByUsername" parameterType="String" resultMap="LOGINMAP">
+		/* loginMapper.loadUserByUsername - 사용자 정보 */
+		SELECT	USR.V_AUCTION_USERCD
+				, USR.V_AUCTION_USERID
+				, USR.V_AUCTION_PWD
+				, USR.V_AUCTION_USERNM
+		FROM		AUCTIONWINI.AUC_AUCTION_MEMBER		USR	/*[옥션회원]*/
+				, AUCTIONWINI.AUC_EMP_INFO		AEI	/*[직원]*/
+		WHERE	1 = 1
+		AND		USR.V_AUCTION_USERCD	= AEI.V_EMP_USERCD(+)
+		AND		USR.V_FLAG_USE		= 'Y'
+		<choose>
+			<when test="_parameter != null and _parameter != ''">
+				AND	UPPER(USR.V_AUCTION_USERID)	= UPPER(#{_parameter})	/*로그인 아이디*/
+			</when>
+			<otherwise>
+				AND 1 = 2	/*파라미터 null처리*/
+			</otherwise>
+		</choose>
+	</select>
+	
+</mapper>

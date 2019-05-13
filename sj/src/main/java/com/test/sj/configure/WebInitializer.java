@@ -6,11 +6,13 @@ import javax.servlet.Filter;
 
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.FrameworkServlet;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import com.test.sj.configure.setting.RootConfiguration;
+import com.test.sj.configure.setting.SecurityConfiguration;
 import com.test.sj.configure.setting.ServletConfiguration;
 
 import lombok.extern.slf4j.Slf4j;
@@ -33,10 +35,10 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
 	 * filter 의 배열 length를 정의한다.
 	 * 해당 클래스 내에서만 사용하므로 접근 제어는 자신만으로 하겠다.
 	 */
-	private final static int SJCONTEXT_LOADER_NUM		= 1,
+	private final static int SJCONTEXT_LOADER_NUM		= 2,
 							 SJCONTEXT_DISPATCHER_NUM	= 1,
 							 SJURL_PATTERN_NUM			= 1,
-							 SJFILTER_NUM				= 1;
+							 SJFILTER_NUM				= 2;
 	/**
 	 * root에는 모든 context에서 참조할 수 있도록 loader에 등록할 context들을 등록해야 하고
 	 */
@@ -48,6 +50,7 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
 		Class<?>[] loaderContext =  new Class<?>[SJCONTEXT_LOADER_NUM];
 		
 		loaderContext[0] = RootConfiguration.class;
+		loaderContext[1] = SecurityConfiguration.class;
 		
 		Arrays.asList(loaderContext)
 				.forEach(x -> {
@@ -100,19 +103,25 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
 	/**
 	 * dispatcher에 등록한 서블릿에서 사용할 필터를 필요에 따라 등록한다.
 	 * 여기서는 요청에 대하여 항상 UTF-8로 인코딩하는 필터 하나만을 등록한다.
+	 * TODO : 스프링 시큐리티용 처리 필터 추가 필요(20190511 완료)
 	 */
 	@Override
 	protected Filter[] getServletFilters() {
 		
 		log.debug("==================== [START : FILTER SETTING] ====================");
 		
-		Filter[]	filter			= new Filter[SJFILTER_NUM];
-		Filter		encodingFilter	= new CharacterEncodingFilter("UTF-8", true);
-//					putPatchFilter	= new HttpPutFormContentFilter();
+		Filter[]				filter			= new Filter[SJFILTER_NUM];
+		Filter					encodingFilter	= new CharacterEncodingFilter("UTF-8", true);
+		//						putPatchFilter	= new HttpPutFormContentFilter();
+		DelegatingFilterProxy	securityFilter	= new DelegatingFilterProxy();
 		
+		/*TODO : 시큐리티에 필요한 해당 Filter는 시큐리티 Config에서 해당 클래스를 가진 bean을 참조하기 때문에
+		 * 반드시 이름을 지정해서 필터이름을 줘야 한다.(20190513)*/
+		securityFilter.setTargetBeanName("springSecurityFilterChain");
 		
 		filter[0] = encodingFilter;
-//		filter[1] = putPatchFilter;
+		filter[1] = securityFilter;
+//		filter[2] = putPatchFilter;
 		
 		Arrays.asList(filter)
 			.forEach(x -> {

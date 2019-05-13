@@ -2,6 +2,7 @@ package com.test.sj.handler;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
@@ -29,7 +30,7 @@ public class GlobalErrorPageHandler{
 	@ExceptionHandler(NoHandlerFoundException.class)
 	@Order(Ordered.HIGHEST_PRECEDENCE)
 	public String notFoundException(Exception exception) {
-		
+		log.error(ExceptionUtils.getStackTrace(exception));
 		log.debug("404 ERROR : " + exception.toString());
 		
 		return "error/error";
@@ -43,6 +44,7 @@ public class GlobalErrorPageHandler{
 	@ExceptionHandler(Exception.class)
 	@Order(Ordered.LOWEST_PRECEDENCE)
 	public String globalException(HttpServletRequest request, Exception exception) {
+		log.error(ExceptionUtils.getStackTrace(exception));
 		
 		log.debug("=====================================");
 		log.debug("* Exception: " + exception.toString());

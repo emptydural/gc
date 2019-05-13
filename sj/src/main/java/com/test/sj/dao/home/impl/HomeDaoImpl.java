@@ -1,6 +1,6 @@
 package com.test.sj.dao.home.impl;
 
-import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.test.sj.dao.home.HomeDao;
@@ -13,9 +13,9 @@ import com.test.sj.vo.home.HomeVO;
 @Repository
 public class HomeDaoImpl implements HomeDao{
 
-	private final SqlSession sqlSession;
+	private final SqlSessionTemplate sqlSession;
 	
-	public HomeDaoImpl(SqlSession sqlSession) {
+	public HomeDaoImpl(SqlSessionTemplate sqlSession) {
 		this.sqlSession = sqlSession;
 	}
 

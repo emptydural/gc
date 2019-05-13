@@ -12,7 +12,7 @@ import com.test.sj.vo.home.HomeVO;
 @Service
 public class HomeServiceImpl implements HomeService{
 
-	private HomeDao homeDao;
+	private final HomeDao homeDao;
 	
 	public HomeServiceImpl(HomeDao homeDao) {
 		this.homeDao = homeDao;
