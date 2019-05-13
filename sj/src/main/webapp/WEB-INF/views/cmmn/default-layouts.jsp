@@ -3,20 +3,20 @@
 <!DOCTYPE html>
 <html>
 	<head>
-  		<tiles:insertAttribute name="header"/>
-  	</head>
-  	<body>
-  		<div class="wrapper">
+		<tiles:insertAttribute name="header"/>
+	</head>
+	<body>
+		<div class="wrapper">
 	  		<tiles:insertAttribute name="left"/>
 	  		<div class="main-panel">	
 			  	<tiles:insertAttribute name="nav"/>
 				<tiles:insertAttribute name="content"/>
 			</div>
 		</div>
-  	</body>
-  	
-  		<!--   Core JS Files and PerfectScrollbar library inside jquery.ui   -->
-    <script src="/resources/js/jquery-ui.min.js" type="text/javascript"></script>
+	</body>
+	
+		<!--   Core JS Files and PerfectScrollbar library inside jquery.ui   -->
+	<script src="/resources/js/jquery-ui.min.js" type="text/javascript"></script>
 	<script src="/resources/js/bootstrap.min.js" type="text/javascript"></script>
 
 	<!--  Forms Validations Plugin -->
