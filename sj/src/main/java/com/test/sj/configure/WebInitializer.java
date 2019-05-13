@@ -42,8 +42,10 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
 	 */
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		Class<?>[] loaderContext =  new Class<?>[SJCONTEXT_LOADER_NUM];
+		
 		log.debug("==================== [START : ROOT CONTEXT SETTING] ====================");
+		
+		Class<?>[] loaderContext =  new Class<?>[SJCONTEXT_LOADER_NUM];
 		
 		loaderContext[0] = RootConfiguration.class;
 		
@@ -61,7 +63,9 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
 	 */
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
+		
 		log.debug("==================== [START : SERVLET CONTEXT SETTING] ====================");
+		
 		Class<?>[] servletContext =  new Class<?>[SJCONTEXT_DISPATCHER_NUM];
 		
 		servletContext[0] = ServletConfiguration.class;
@@ -80,9 +84,11 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
 	 */
 	@Override
 	protected String[] getServletMappings() {
+		
+		log.debug("==================== [START : PATTERN SETTING] ====================");
+		
 		String[]	pattern		= new String[SJURL_PATTERN_NUM];
 		String		allPattern	= "/";
-		log.debug("==================== [START : PATTERN SETTING] ====================");
 		
 		pattern[0] = allPattern;
 		
@@ -97,10 +103,12 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
 	 */
 	@Override
 	protected Filter[] getServletFilters() {
+		
+		log.debug("==================== [START : FILTER SETTING] ====================");
+		
 		Filter[]	filter			= new Filter[SJFILTER_NUM];
 		Filter		encodingFilter	= new CharacterEncodingFilter("UTF-8", true);
 //					putPatchFilter	= new HttpPutFormContentFilter();
-		log.debug("==================== [START : FILTER SETTING] ====================");
 		
 		
 		filter[0] = encodingFilter;
@@ -123,6 +131,7 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
 	 */
 	@Override
 	protected FrameworkServlet createDispatcherServlet(WebApplicationContext servletAppContext) {
+		
 		log.debug("==================== [START : CREATE DISPATCHER SERVLET] ====================");
 		
 		DispatcherServlet	dispatcherServlet	= (DispatcherServlet) super.createDispatcherServlet(servletAppContext);
