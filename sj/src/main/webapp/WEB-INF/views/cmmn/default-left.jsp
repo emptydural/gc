@@ -38,15 +38,15 @@
         </div>
         <ul class="nav">
             <li id="homecopy" class="menu">
-                <a href="#">
-                    <i class="pe-7s-graph"></i>
+                <a href="javascript:;">
+                    <i class="pe-7s-home"></i>
                     <p>(TEST)error</p>
                 </a>
             </li>
             
             <li id="nourl" class="menu">
-                <a href="#">
-                    <i class="pe-7s-graph"></i>
+                <a href="javascript:;">
+                    <i class="pe-7s-home"></i>
                     <p>(TEST)noUrl</p>
                 </a>
             </li>
