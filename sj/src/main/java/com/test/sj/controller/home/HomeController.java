@@ -4,6 +4,7 @@ import java.util.Locale;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -33,7 +34,7 @@ public class HomeController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@GetMapping(value = "/")
 	public String home(Locale locale, Model model) {
 		log.info("Welcome home! The client locale is {}.", locale);
 		
@@ -51,7 +52,7 @@ public class HomeController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/homecopy", method = RequestMethod.GET)
+	@GetMapping(value = "/homecopy")
 	public String homecopy(Locale locale, Model model) {
 		log.info("Welcome underworld! The client locale is {}.", locale);
 		
