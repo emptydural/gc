@@ -1,5 +1,6 @@
 package com.test.sj.configure.setting;
 
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -7,7 +8,8 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-import com.test.sj.service.login.impl.LoginServiceImpl;
+import com.test.sj.aop.annotation.ConfigLoggingEnable;
+import com.test.sj.login.service.impl.LoginServiceImpl;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -15,7 +17,13 @@ import lombok.extern.slf4j.Slf4j;
  * security.xml 대응
  * 현재 유저 정보 로드 해주는 서비스 콩은 rootConfigurer에서 생성되므로 반드시 해당 클래스가 root보다 나중에 실행되어야 한다.
  */
+/**
+ * Configuration 대응
+ * Spring security 대응
+ */
 @Slf4j
+@Configuration
+@ConfigLoggingEnable
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	

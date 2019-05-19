@@ -22,8 +22,11 @@ import com.test.sj.configure.prop.SjProp;
  * aop로 구현하기 위한 Aspect annotation은 클래스 단위이기 때문에 분리하였다.
  */
 
+/**
+ * Enable AOP
+ * Configuration 적용 클래스
+ */
 @Aspect
-@Configuration
 public class TransactionConfiguration {
 
 	/* 
@@ -70,7 +73,7 @@ public class TransactionConfiguration {
 		DefaultPointcutAdvisor		txAdvisor	= null;
 		
 		/*pointcut은 서비스가 있는 serviceImpl 기준으로*/
-		pointcut.setExpression("execution(* " + SjProp.BASE_PACKAGE + ".service..impl.*Impl.*(..)");
+		pointcut.setExpression("execution(* " + SjProp.BASE_PACKAGE + ".*..impl.*Impl.*(..)");
 		
 		return txAdvisor;
 	}

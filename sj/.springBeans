@@ -7,6 +7,12 @@
 	</configSuffixes>
 	<enableImports><![CDATA[true]]></enableImports>
 	<configs>
+		<config>java:com.test.sj.configure.WebInitializer</config>
+		<config>java:com.test.sj.configure.setting.SecurityConfiguration</config>
+		<config>java:com.test.sj.configure.setting.RootConfiguration</config>
+		<config>java:com.test.sj.configure.setting.ServletConfiguration</config>
+		<config>java:com.test.sj.configure.setting.TransactionConfiguration</config>
+		<config>java:com.test.sj.configure.ex.MyBatisConfigureSetting</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

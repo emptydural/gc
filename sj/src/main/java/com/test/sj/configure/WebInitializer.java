@@ -3,7 +3,9 @@ package com.test.sj.configure;
 import java.util.Arrays;
 
 import javax.servlet.Filter;
+import javax.servlet.annotation.HandlesTypes;
 
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.DelegatingFilterProxy;
@@ -25,7 +27,13 @@ import lombok.extern.slf4j.Slf4j;
  * 기타 에러 페이지 리다이렉트에 대해서는 현재 여기서 정의할 수가 없는 것으로 보이며
 * 404, 500 에러에 대해서만 따로 컨트롤러 advice를 만들어 핸들링할 예정이다. (20190502 진행중)
 */
+/**
+ * @Configure 클래스
+ * @WebInitilazor 핸들링
+ */
 @Slf4j
+@Configuration
+@HandlesTypes(WebInitializer.class)
 public class WebInitializer extends AbstractAnnotationConfigDispatcherServletInitializer{
 	
 	/* 

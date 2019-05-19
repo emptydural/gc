@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import com.test.sj.aop.annotation.ConfigLoggingEnable;
 import com.test.sj.configure.ex.MyBatisConfigureSetting;
 import com.test.sj.configure.prop.SjProp;
 import com.zaxxer.hikari.HikariConfig;
@@ -43,9 +44,15 @@ import net.sf.log4jdbc.tools.LoggingType;
  * 트랜젝션 매니저로 사용하고 원하는위치에 transactional 어노테이션을 놓는 것으로 기능이 동작한다.
  * 즉 tx:annotation-driven과 동일하나 여기서는 aop로 포인트컷을 주어 구현을 해보자(20190508 주석 완료)
  */
-//@EnableTransactionManagement
+
+/**
+ * Configure인 클래스,
+ * Component 등록( service, repository, Component 외부 Bean)
+ */
+//EnableTransactionManagement
 @Slf4j
 @Configuration
+@ConfigLoggingEnable
 @ComponentScan(basePackages = SjProp.BASE_PACKAGE,
 				useDefaultFilters = false,
 				includeFilters = @ComponentScan.Filter(type=FilterType.ANNOTATION,

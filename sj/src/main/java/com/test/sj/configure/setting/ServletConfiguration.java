@@ -20,6 +20,7 @@ import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesView;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
+import com.test.sj.aop.annotation.ConfigLoggingEnable;
 import com.test.sj.configure.prop.SjProp;
 
 import lombok.extern.slf4j.Slf4j;
@@ -34,8 +35,16 @@ import lombok.extern.slf4j.Slf4j;
  *  또한 리소스 Path 등록이 필요하기 떄문에 WebMvcConfigureAdapter를 상속받는다.
  * 원인은 ComponentScan시 @Configuration에 대해 scan 범위에서 제외시켜주지 않아 일어났던 일(20190503 완료)
  */
+
+/**
+ * Configure 클래스
+ * WebMvc RequestMapping에 의한 핸들러 등록
+ * AOP 사용
+ * Component 등록( Controller)
+ */
 @Slf4j
 @Configuration
+@ConfigLoggingEnable
 @EnableWebMvc
 @EnableAspectJAutoProxy
 @ComponentScan(basePackages = SjProp.BASE_PACKAGE,

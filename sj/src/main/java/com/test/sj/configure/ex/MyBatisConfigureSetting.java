@@ -9,8 +9,8 @@ import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.TypeAliasRegistry;
 import org.springframework.stereotype.Component;
 
-import com.test.sj.vo.home.HomeVO;
-import com.test.sj.vo.login.LoginVO;
+import com.test.sj.home.service.impl.HomeVO;
+import com.test.sj.login.service.impl.LoginVO;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
